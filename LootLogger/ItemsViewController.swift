@@ -22,22 +22,7 @@ class ItemsViewController: UITableViewController{
             tableView.insertRows(at: [indexPath], with: .automatic)
         }
     }
-    @IBAction func toggleEditingMode(_ sender: UIButton){
-        // If you are currently in editing mode...
-        if isEditing {
-            // Change text of button to inform user of state
-            sender.setTitle("Edit", for: .normal)
-            
-            // Turn off editing mode
-            setEditing(false, animated: true)
-        } else{
-            //Change text of button to inform user of state
-            sender.setTitle("Done", for: .normal)
-            
-            //Enter editing mode
-            setEditing(true, animated: true)
-        }
-    }
+
     
     // Set number of rows in Cell
     override func tableView(_ tableView: UITableView,
@@ -113,7 +98,11 @@ class ItemsViewController: UITableViewController{
         itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
-    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
     
     
     override func viewDidLoad() {
